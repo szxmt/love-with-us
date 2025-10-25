@@ -1,100 +1,120 @@
-<!DOCTYPE html><html lang="zh">
+<!DOCTYPE html>
+<html lang="zh">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>可以做我的恋人吗？</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>love-with-us</title>
   <style>
     body {
       font-family: "Helvetica Neue", sans-serif;
-      background-color: #fff9f9;
+      background-color: #fff0f5;
+      margin: 0;
+      padding: 0;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       height: 100vh;
-      margin: 0;
-      color: #444;
+      overflow: hidden;
+      position: relative;
     }
-    h1 {
-      font-size: 1.8em;
-      margin-bottom: 40px;
+    .hidden {
+      display: none;
     }
-    .btn {
-      padding: 12px 24px;
+    .login-box {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      background: rgba(255,255,255,0.9);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    input[type="password"] {
+      padding: 10px;
       font-size: 1em;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      width: 200px;
+    }
+    button {
+      margin-top: 12px;
+      padding: 10px 20px;
+      font-size: 1em;
+      background-color: #ff69b4;
+      color: white;
       border: none;
       border-radius: 8px;
-      margin: 8px;
       cursor: pointer;
-      transition: all 0.3s ease;
     }
-    #yes {
-      background-color: #ffb6c1;
-      color: white;
+    .content {
+      text-align: center;
+      z-index: 10;
+      position: relative;
     }
-    #no {
-      background-color: #eee;
-      color: #444;
+    .hearts {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      top: 0;
+      left: 0;
+      z-index: 1;
     }
-    #voice {
-      margin-top: 20px;
-      font-size: 0.9em;
-      color: #888;
-      background: none;
-      border: none;
-      cursor: pointer;
-      text-decoration: underline;
+    .hearts span {
+      position: absolute;
+      display: block;
+      width: 20px;
+      height: 20px;
+      background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Emoji_u1f497.svg/1024px-Emoji_u1f497.svg.png') no-repeat center center / contain;
+      animation: float 10s linear infinite;
+      opacity: 0.6;
+    }
+    @keyframes float {
+      0% {transform: translateY(100vh) translateX(0);}
+      100% {transform: translateY(-10vh) translateX(20vw);}
     }
   </style>
 </head>
 <body>
-  <h1>可以做我的恋人吗？🥺</h1>
-  <div>
-    <button id="yes" class="btn">可以！</button>
-    <button id="no" class="btn">再考虑一下...</button>
+  <div class="hearts" id="hearts"></div>
+
+  <div class="login-box" id="loginBox">
+    <h2>请输入密码进入💗</h2>
+    <input type="password" id="passwordInput" placeholder="密码是..." />
+    <br/>
+    <button onclick="checkPassword()">进入</button>
+    <p id="errorMsg" style="color: red; display: none;">密码错误啦～再想想是谁的小猫咪？</p>
   </div>
-  <button id="voice">点我听个小彩蛋💗</button>  <audio id="audio" preload="auto">
-    <source src="https://upload.wikimedia.org/wikipedia/commons/e/e2/Example.ogg" type="audio/ogg" />
-    <source src="https://upload.wikimedia.org/wikipedia/commons/e/e2/Example.ogg" type="audio/mpeg" />
-    您的浏览器不支持音频播放。
-  </audio>  <script>
-    const noBtn = document.getElementById("no");
-    const yesBtn = document.getElementById("yes");
-    const voiceBtn = document.getElementById("voice");
-    const audio = document.getElementById("audio");
 
-    const texts = [
-      "真的吗不可以吗🥺", 
-      "那我撒个娇呢👉👈", 
-      "真的不再想想吗？🥹", 
-      "我会乖乖的！", 
-      "再不答应我要哭啦🥺", 
-      "你真的狠得下心嘛", 
-      "你明明也喜欢我对吧！", 
-      "那我亲你一下再问一次...", 
-      "别考虑了啦就现在吧！",
-      "好嘛好嘛就选可以！"
-    ];
+  <div class="content hidden" id="content">
+    <h1>love-with-us 💖</h1>
+    <p>欢迎来到专属小猫的秘密花园🥺</p>
+    <p>以后想说的悄悄话、要送的浪漫、都会藏在这里✨</p>
+  </div>
 
-    let index = 0;
-
-    noBtn.addEventListener("click", () => {
-      if (index < texts.length) {
-        noBtn.innerText = texts[index];
-        index++;
-        yesBtn.style.transform = `scale(${1 + index * 0.05})`;
+  <script>
+    function checkPassword() {
+      const input = document.getElementById("passwordInput").value;
+      const correct = "Alice的专属小猫";
+      if (input === correct) {
+        document.getElementById("loginBox").style.display = "none";
+        document.getElementById("content").classList.remove("hidden");
       } else {
-        noBtn.remove();
-        alert("好啦，只能选可以了哦～");
+        document.getElementById("errorMsg").style.display = "block";
       }
-    });
+    }
 
-    yesBtn.addEventListener("click", () => {
-      alert("我喜欢你，从现在开始你就是我的了🖤");
-    });
-
-    voiceBtn.addEventListener("click", () => {
-      audio.play();
-    });
-  </script></body>
+    // 生成爱心
+    const hearts = document.getElementById("hearts");
+    for (let i = 0; i < 40; i++) {
+      const span = document.createElement("span");
+      span.style.left = Math.random() * 100 + "vw";
+      span.style.animationDuration = (6 + Math.random() * 5) + "s";
+      span.style.opacity = 0.3 + Math.random() * 0.5;
+      span.style.transform = `scale(${0.5 + Math.random() * 0.8})`;
+      hearts.appendChild(span);
+    }
+  </script>
+</body>
 </html>
