@@ -1,0 +1,100 @@
+<!DOCTYPE html><html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>可以做我的恋人吗？</title>
+  <style>
+    body {
+      font-family: "Helvetica Neue", sans-serif;
+      background-color: #fff9f9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      color: #444;
+    }
+    h1 {
+      font-size: 1.8em;
+      margin-bottom: 40px;
+    }
+    .btn {
+      padding: 12px 24px;
+      font-size: 1em;
+      border: none;
+      border-radius: 8px;
+      margin: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    #yes {
+      background-color: #ffb6c1;
+      color: white;
+    }
+    #no {
+      background-color: #eee;
+      color: #444;
+    }
+    #voice {
+      margin-top: 20px;
+      font-size: 0.9em;
+      color: #888;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>可以做我的恋人吗？🥺</h1>
+  <div>
+    <button id="yes" class="btn">可以！</button>
+    <button id="no" class="btn">再考虑一下...</button>
+  </div>
+  <button id="voice">点我听个小彩蛋💗</button>  <audio id="audio" preload="auto">
+    <source src="https://upload.wikimedia.org/wikipedia/commons/e/e2/Example.ogg" type="audio/ogg" />
+    <source src="https://upload.wikimedia.org/wikipedia/commons/e/e2/Example.ogg" type="audio/mpeg" />
+    您的浏览器不支持音频播放。
+  </audio>  <script>
+    const noBtn = document.getElementById("no");
+    const yesBtn = document.getElementById("yes");
+    const voiceBtn = document.getElementById("voice");
+    const audio = document.getElementById("audio");
+
+    const texts = [
+      "真的吗不可以吗🥺", 
+      "那我撒个娇呢👉👈", 
+      "真的不再想想吗？🥹", 
+      "我会乖乖的！", 
+      "再不答应我要哭啦🥺", 
+      "你真的狠得下心嘛", 
+      "你明明也喜欢我对吧！", 
+      "那我亲你一下再问一次...", 
+      "别考虑了啦就现在吧！",
+      "好嘛好嘛就选可以！"
+    ];
+
+    let index = 0;
+
+    noBtn.addEventListener("click", () => {
+      if (index < texts.length) {
+        noBtn.innerText = texts[index];
+        index++;
+        yesBtn.style.transform = `scale(${1 + index * 0.05})`;
+      } else {
+        noBtn.remove();
+        alert("好啦，只能选可以了哦～");
+      }
+    });
+
+    yesBtn.addEventListener("click", () => {
+      alert("我喜欢你，从现在开始你就是我的了🖤");
+    });
+
+    voiceBtn.addEventListener("click", () => {
+      audio.play();
+    });
+  </script></body>
+</html>
